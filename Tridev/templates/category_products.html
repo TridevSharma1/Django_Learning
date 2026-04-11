@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Products by Category</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #eef2f3, #ffffff);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .category {
+            margin-bottom: 60px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .category-header img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4CAF50;
+        }
+
+        .category-header h2 {
+            font-size: 24px;
+            color: #222;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .price {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #388E3C;
+        }
+
+        .empty {
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <h1>🛍️ Products by Category</h1>
+
+    {% for category in categories %}
+
+    <div class="category">
+
+        <div class="category-header">
+            {% if category.category_image %}
+            <img src="{{ category.category_image.url }}">
+            {% endif %}
+            <h2>{{ category.category_name }}</h2>
+        </div>
+
+        <div class="products">
+            {% for product in category.products.all %}
+            <div class="product-card">
+
+                <img src="{{ product.product_image.url }}">
+
+                <div class="card-body">
+                    <div class="product-name">{{ product.product_name }}</div>
+
+                    <div class="price">₹{{ product.product_price }}</div>
+
+                    <div class="description">
+                        {{ product.product_description|truncatewords:10 }}
+                    </div>
+
+                    <a href="#" class="btn">View Details</a>
+                </div>
+
+            </div>
+            {% empty %}
+            <p class="empty">No products available in this category.</p>
+            {% endfor %}
+        </div>
+
+
+    </div>
+    {% endfor %}
+
+</body>
+
+</html>
