@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Tridev.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'first_testing_db',
+        'NAME': 'first_django_db',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': 'localhost',
