@@ -13,3 +13,7 @@ def category_list(request):
     }
     
     return render(request, 'category_list.html', context)
+
+def product_list(request):
+    products = Product.objects.all()
+    return render(request, 'product_list.html', {'products': products})
